@@ -1,0 +1,92 @@
+<h2>Template</h2> <small>Dinámicos</small>
+<hr>
+
+<form (ngSubmit)="save()"
+      #personForm="ngForm"
+      autocomplete="off">
+
+      <!-- Name -->
+    <div class="mb-3 row">
+
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <input type="text" 
+                   [ngModel]="person.name"
+                   name="name"
+                   class="form-control"
+                   placeholder="Nombre de la persona"
+                   required
+                   minlength="3"
+                   maxlength="50">
+        </div>
+        <span *ngIf="personForm.controls['name']?.errors && personForm.controls['name']?.touched" 
+              class="form-text text-danger"> 
+            Campo obligatorio.
+        </span> 
+    </div>
+
+    <!-- Agregar juego -->
+    <div class="mb-3 row">
+
+        <label class="col-sm-3 col-form-label">Agregar</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input type="text" 
+                       class="form-control"
+                       placeholder="Agregar juego favorito"
+                       [(ngModel)]="newFav"
+                       name="fav"
+                       minlength="3"
+                       maxlength="50"
+                       (keyup.enter)="addFav(newFav)">
+                       <button type="button" 
+                               class="btn btn-outline-primary"
+                               (click)="addFav(newFav)">
+                            Agregar
+                        </button>
+            </div>
+        </div>
+
+    </div>
+
+      <!-- Listado de juegos favoritos -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9">
+            <div class="row">
+
+                <div class="input-group mb-1"
+                     *ngFor="let fav of person.favs; let i = index">
+                    <input class="form-control"       
+                            name="juego_{{i}}"
+                            [(ngModel)]="fav.name">
+                    <button type="button" class="btn btn-outline-danger"
+                           (click)="removeFav( i )">
+                        <strong>-</strong>
+                    </button>         
+        
+                  </div>
+                  <!-- 
+                <input  *ngFor="let fav of person.favs; let i = index"
+                        name="juego_{{i}}"
+                        [ngModel]="fav.name"
+                        class="form-conrol mb-1"> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button"    
+                    class="btn btn-primary float-end"
+                    (click)="save()"
+                    [disabled]="personForm.invalid">
+                Guardar
+            </button>
+        </div>
+    </div>
+
+</form>
+
+<span>Persona</span>
+<pre> {{ person | json }} </pre>

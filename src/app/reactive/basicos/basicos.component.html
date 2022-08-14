@@ -1,0 +1,101 @@
+<h2>Reactivos: <small>Básicos</small> </h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <form autocomplete="off"
+              [formGroup]="form"
+              (ngSubmit)="save()">
+
+            <!-- Product field -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label"> Producto </label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           class="form-control"
+                           formControlName="name"
+                           placeholder="Nombre del producto">
+                    <span class="form-text text-danger"
+                          *ngIf="invalidField('name')">
+                        Debe tener al menos 3 caracteres.
+                    </span>
+                </div>
+            </div>
+
+            <!-- Price field -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label"> Precio </label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control"
+                           formControlName="price"
+                           placeholder="Precio del producto">
+                    <span class="form-text text-danger" 
+                          *ngIf="invalidField('price')">
+                        Debe ser igual o mayor que 0. 
+                    </span>                           
+                </div>
+            </div>
+
+            <!-- Stock field -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label"> Stock </label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control"
+                           formControlName="stock"
+                           placeholder="Stock">
+                           <span class="form-text text-danger" 
+                                 *ngIf="invalidField('stock')">
+                                   Debe ser igual o mayor que 0. 
+                           </span>   
+                </div>
+            </div>
+
+            <!-- Save button form -->
+            <div class="row">
+                <div class="col">
+                    <button type="submit" 
+                            class="btn btn-primary float-end">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<div class="row">
+    <div>
+        <span>Valid:</span>
+        {{ form.valid}}
+    </div>
+    <br>
+    <div>
+        <span>Pristine: </span>
+        {{ form.pristine}}
+    </div>
+    <br>
+    <div>
+        <span>Touched: </span>
+        {{ form.touched}}
+    </div>
+    <br>
+    <div>
+        <span>Value:</span>
+        {{ form.value | json }}
+    </div>
+    <br>
+    <div>
+        <span>Price:</span>
+        {{ form.controls['price']['errors'] | json }}
+    </div>
+    <div>
+        <span>CustomDirective:</span>
+        {{ form.controls['stock']['errors'] | json }}
+    </div>
+        
+
+</div>
