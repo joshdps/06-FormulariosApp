@@ -12,4 +12,8 @@ export class UtilService {
     return form.controls[ field ].invalid && form.controls[ field ].touched
   }
 
+  fieldHasErrors(  form: FormGroup, field: string ){
+    return form.controls[ field ]?.errors && form.controls[ field ].touched
+  }
+
 }

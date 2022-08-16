@@ -19,3 +19,14 @@
         {{item.text}}
     </li>
 </ul>
+
+<h2> Validaciones </h2>
+<hr>
+<ul class="list-group">
+    <li *ngFor="let item of AuthItems" 
+        class="list-group-item list-group-item-action"
+        [routerLink] = [item.route]
+        routerLinkActive="active">
+        {{item.text}}
+    </li>
+</ul>

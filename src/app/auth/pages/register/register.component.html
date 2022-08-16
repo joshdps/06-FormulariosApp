@@ -1,0 +1,121 @@
+<div class="container">
+    <h2>Validaciones Reactivas</h2>
+    <hr>
+
+    <div class="row bg-primary bg-opacity-10 justify-content-center border border-success border-opacity-50  mb-2 rounded">
+        <div class="col-10">
+            <form autocomplete="off"
+                  [formGroup]="form"
+                  (ngSubmit)="submitForm()"
+                  class="d-flex flex-column m-2">
+
+                <span class="row justify-content-center p-2">Login</span>
+                <br>
+                <!-- Name -->
+                <div class="row mb-3">
+                    <!-- <label class="col-sm-3 col-form-label">Nombre</label> -->
+                    <div class="col-sm-12">
+                        <input type="text" 
+                               class="form-control" 
+                               formControlName="name"
+                               placeholder="Username">
+                        <span class="form-text text-danger"
+                              *ngIf="invalidField('name')">
+                            Debe ser en formato nombre y apellido.
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="row mb-3">
+                    <!-- <label class="col-sm-3 col-form-label">Email</label> -->
+                    <div class="col-sm-12">
+                        <input type="email" 
+                               class="form-control"
+                               formControlName="email" 
+                               placeholder="Email">
+                        <span class="form-text text-danger"
+                              *ngIf="invalidField('email')">
+                            {{ emailErrorMsg }}
+                        </span>
+                    </div>
+                </div>
+ 
+                <!-- Username -->
+                <div class="row mb-3">
+                    <!-- <label class="col-sm-3 col-form-label">Username</label> -->
+                    <div class="col-sm-12">
+                        <input type="text" 
+                               class="form-control" 
+                               placeholder="Username"
+                               formControlName="username">
+                        <span class="form-text text-danger"
+                              *ngIf="invalidField('username')">
+                           No puede ser shiotome.
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Password -->
+                <div class="row mb-3">
+                    <!-- <label class="col-sm-3 col-form-label">Password</label> -->
+                    <div class="col-sm-12">
+                        <input type="password" 
+                               class="form-control" 
+                               formControlName="password"                               
+                               placeholder="Password">
+                        <span class="form-text text-danger"
+                              *ngIf="invalidField('password')">
+                            Debe contener al menos 6 caracteres
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Confirm Password -->
+                <div class="row mb-3">
+                    <!-- <label class="col-sm-3 col-form-label">Confirm Password</label> -->
+                    <div class="col-sm-12">
+                        <input type="password" 
+                               class="form-control" 
+                               formControlName="confirmPassword"                               
+                               placeholder="Confirm Password">
+                        <span class="form-text text-danger"
+                              *ngIf="invalidField('confirmPassword')">
+                            Contraseña no coincide
+                        </span>
+                    </div>
+                </div>
+                <div class="row m-1">
+                        <button class="btn btn-primary float-end"
+                                [disabled]="form.pending">
+                            Registrar
+                        </button>
+                        
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+<br>
+<div class="row ">
+    <div class="col-6 d-flex flex-column">
+        <span> Form Valid  <pre>{{ form.valid }}</pre></span>
+
+        <span> Form State  <pre>{{ form.status }}</pre></span>
+        
+        <span> Form Errors  <pre>{{ form['errors'] | json }}</pre></span>
+
+        <span>Nombre <pre>{{form.get('name')?.errors | json}}</pre></span>
+        
+        <span>Email: Errors <pre>{{form.get('email')?.errors | json}}</pre></span>
+
+
+        <span>Contraseñas: <small>Errors</small>  </span>
+        <pre>{{ form.get('password')?.errors | json}}</pre>
+        
+        <span>Username <pre>{{ form.controls['username']['errors'] | json }}</pre></span>
+    </div>
+</div>
+</div>
+
